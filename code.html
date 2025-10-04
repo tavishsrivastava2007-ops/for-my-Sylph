@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Handwritten Love Note</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+  /* Handwritten style font */
+  body {
+    margin: 0;
+    background: #fff0f5; /* soft pastel pink */
+    font-family: 'Indie Flower', cursive;
+    color: #5a3e36;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+  }
+  /* Floating doodles container */
+  .doodles {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .doodle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    opacity: 0.3;
+    animation: floaty 6s ease-in-out infinite;
+  }
+  .doodle.cat { fill: #f4a6b9; }
+  .doodle.heart { fill: #f28ab2; }
+  .doodle.star { fill: #f9d56e; }
+
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+    50% { transform: translateY(-10px) translateX(5px) rotate(10deg); }
+  }
+
+  /* Container for content */
+  .container {
+    max-width: 480px;
+    margin: 3rem auto 5rem;
+    padding: 1rem 1.5rem 3rem;
+    background: #fff8f9;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(182, 132, 132, 0.3);
+    position: relative;
+    z-index: 10;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.2rem;
+    color: #d94f6d;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  h1 .heart-emoji {
+    font-size: 2.4rem;
+  }
+  h2 {
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 1.8rem;
+    color: #a85a6a;
+    font-weight: 400;
+  }
+
+  /* Letter text card */
+  .letter-card {
+    background: #fff0f5;
+    border-radius: 18px;
+    box-shadow: 0 6px 15px rgba(182, 132, 132, 0.25);
+    padding: 1.8rem 2rem 2.2rem;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    white-space: pre-line;
+    color: #6b4a4a;
+    position: relative;
+  }
+
+  /* Cat holding heart SVG container */
+  .cat-heart {
+    position: absolute;
+    bottom: -60px;
+    right: 20px;
+    width: 90px;
+    height: 90px;
+    filter: drop-shadow(1px 2px 1px rgba(0,0,0,0.1));
+  }
+
+  /* Bottom playful note */
+  .footer-note {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1rem;
+    color: #b35a6a;
+    font-weight: 600;
+    user-select: none;
+  }
+
+  /* Floating hearts on scroll */
+  .scroll-hearts {
+    position: fixed;
+    pointer-events: none;
+    z-index: 20;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: visible;
+  }
+  .scroll-heart {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    fill: #f28ab2;
+    opacity: 0.8;
+    animation: floatUp 3s ease forwards;
+  }
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(-120px) scale(1.3);
+      opacity: 0;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 520px) {
+    .container {
+      margin: 2rem 1rem 4rem;
+      padding: 1.2rem 1.4rem 2.5rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+    }
+    h2 {
+      font-size: 1.2rem;
+    }
+    .letter-card {
+      font-size: 1rem;
+    }
+    .cat-heart {
+      width: 70px;
+      height: 70px;
+      bottom: -50px;
+      right: 15px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="doodles" aria-hidden="true">
+  <!-- Multiple small doodles placed around edges -->
+  <svg class="doodle cat" style="top: 10px; left: 15px;" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M32 4c-6 0-10 5-10 11 0 6 4 11 10 11s10-5 10-11c0-6-4-11-10-11z" />
+    <circle cx="24" cy="20" r="3" fill="#fff"/>
+    <circle cx="40" cy="20" r="3" fill="#fff"/>
+    <path d="M22 30c0 6 20 6 20 0" stroke="#f4a6b9" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </svg>
+  <svg class="doodle heart" style="top: 40px; right: 20px;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M12 21s-8-6.5-8-11a4 4 0 0 1 8-2 4 4 0 0 1 8 2c0 4.5-8 11-8 11z"/>
+  </svg>
+  <svg class="doodle star" style="bottom: 15px; left: 25px;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <polygon points="12 2 15 9 22 9 16 14 18 21 12 17 6 21 8 14 2 9 9 9" />
+  </svg>
+  <svg class="doodle cat" style="bottom: 30px; right: 30px;" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M32 4c-6 0-10 5-10 11 0 6 4 11 10 11s10-5 10-11c0-6-4-11-10-11z" />
+    <circle cx="24" cy="20" r="3" fill="#fff"/>
+    <circle cx="40" cy="20" r="3" fill="#fff"/>
+    <path d="M22 30c0 6 20 6 20 0" stroke="#f4a6b9" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </svg>
+  <svg class="doodle heart" style="top: 120px; left: 5px;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M12 21s-8-6.5-8-11a4 4 0 0 1 8-2 4 4 0 0 1 8 2c0 4.5-8 11-8 11z"/>
+  </svg>
+  <svg class="doodle star" style="top: 150px; right: 10px;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <polygon points="12 2 15 9 22 9 16 14 18 21 12 17 6 21 8 14 2 9 9 9" />
+  </svg>
+</div>
+
+<div class="container" role="main" aria-label="Love note to Slyph">
+  <h1>
+    I miss you, <span id="recipient-name">Slyph</span> <span class="heart-emoji" aria-hidden="true">💕</span>
+  </h1>
+  <h2>You're always on my mind.</h2>
+
+  <div class="letter-card" aria-label="Love letter">
+    <p>
+      My dearest <span id="recipient-name-2">Slyph</span>,<br><br>
+      I miss the sound of your voice more than words can explain. Little things remind me of you — the way you laugh, the warmth of your smile, the small moments that feel so big when you’re by my side.<br><br>
+      I think about our memories and they make me smile, but they also make me wish I could be with you right now. You turn ordinary days into something special just by being in my life.<br><br>
+      Can we talk soon? Even just hearing you say hello would make my whole day brighter. Until then, know that I’m always thinking of you and holding you close in my heart.<br><br>
+      With all my love,<br>
+      <span id="sender-name">Vish</span>
+    </p>
+
+    <!-- Cat holding heart SVG -->
+    <svg class="cat-heart" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" >
+      <g fill="none" stroke="#d94f6d" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+        <!-- Cat head -->
+        <circle cx="32" cy="24" r="12" fill="#f4a6b9" />
+        <circle cx="26" cy="20" r="3" fill="#fff"/>
+        <circle cx="38" cy="20" r="3" fill="#fff"/>
+        <path d="M24 30c0 6 16 6 16 0" stroke="#d94f6d" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Ears -->
+        <path d="M20 14l6-8 6 8" fill="#f4a6b9" />
+        <!-- Body holding heart -->
+        <path d="M20 36c0 10 24 10 24 0" fill="#f4a6b9" />
+        <path d="M32 40c-6 0-6 8 0 8s6-8 0-8z" fill="#f28ab2" />
+        <path d="M32 40v8" stroke="#d94f6d" stroke-width="1.5" />
+      </g>
+    </svg>
+  </div>
+</div>
+
+<div class="footer-note" aria-label="Playful note">
+  This page is just for you, <span id="recipient-name-3">Slyph</span>🐾💖
+</div>
+
+<div class="scroll-hearts" aria-hidden="true"></div>
+
+<script>
+  // Placeholders for easy editing
+  const recipient = "Slyph";
+  const sender = "Vish";
+
+  // Update all recipient and sender placeholders
+  document.querySelectorAll('#recipient-name, #recipient-name-2, #recipient-name-3').forEach(el => el.textContent = recipient);
+  document.querySelectorAll('#sender-name').forEach(el => el.textContent = sender);
+
+  // Floating hearts on scroll
+  const scrollHeartsContainer = document.querySelector('.scroll-hearts');
+
+  function createHeart(x, y) {
+    const heart = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    heart.setAttribute("class", "scroll-heart");
+    heart.setAttribute("viewBox", "0 0 24 24");
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", "M12 21s-8-6.5-8-11a4 4 0 0 1 8-2 4 4 0 0 1 8 2c0 4.5-8 11-8 11z");
+    path.setAttribute("fill", "#f28ab2");
+    heart.appendChild(path);
+
+    scrollHeartsContainer.appendChild(heart);
+
+    // Animate and remove after animation
+    setTimeout(() => {
+      heart.remove();
+    }, 3000);
+  }
+
+  window.addEventListener('scroll', e => {
+    // Random chance to create a heart on scroll
+    if (Math.random() < 0.15) {
+      const x = Math.random() * window.innerWidth;
+      const y = window.innerHeight + 20;
+      createHeart(x, y);
+    }
+  });
+</script>
+
+</body>
+</html>
